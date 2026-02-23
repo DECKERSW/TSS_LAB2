@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Class-Path: .
+Main-Class: TitlesFrame
+Permissions: all-permissions
+Codebase: *
+Caller-Allowable-Codebase: *
+Application-Library-Allowable-Codebase: *
+Created-By: 11.0.18 (Ubuntu)
+
+Name: ShapeFactory.class
+SHA-256-Digest: IH9voWZRVk27B1959h2U3gOyU9Iu9VoRYsRlWLWr0z0=
+
+Name: TitlesFrame$1.class
+SHA-256-Digest: k1uY1pPuGrEtbBSqlIGYnqutObD4faqnG8DCFYHPaE0=
+
+Name: TitlesFrame.class
+SHA-256-Digest: nu6yd/RB0h7B2uDf5XQUPU6YD8fzvEDZBj+VD2oivuw=
+
+Name: TitlesPanel.class
+SHA-256-Digest: ARyC5VasSTqX33JuXhph0TVPOFg7wQi/tb8hPLDUOkk=
+
