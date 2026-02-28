@@ -1,4 +1,3 @@
-/* Decompiler 69ms, total 305ms, lines 27 */
 import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -8,6 +7,10 @@ public class TitlesFrame extends JFrame {
         this.initUI();
     }
 
+    /**
+     * Налаштовує параметри головного вікна програми.
+     * Встановлює заголовок, розмір, поведінку при закритті та додає графічну панель.
+     */
     private void initUI() {
         this.setTitle("Кривые фигуры");
         this.setDefaultCloseOperation(3);
@@ -16,6 +19,12 @@ public class TitlesFrame extends JFrame {
         this.setLocationRelativeTo((Component)null);
     }
 
+    /**
+     * Головна точка входу в програму.
+     * Запускає графічний інтерфейс користувача у безпечному потоці обробки подій.
+     *
+     * @param args аргументи командного рядка
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

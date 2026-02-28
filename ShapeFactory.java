@@ -1,4 +1,3 @@
-/* Decompiler 135ms, total 375ms, lines 88 */
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -15,6 +14,12 @@ public class ShapeFactory {
     public int width = 25;
     public int height = 25;
 
+    /**
+     * Конструктор фабрики фігур.
+     * Ініціалізує геометричну форму та стиль заливки на основі переданого ідентифікатора.
+     *
+     * @param shape_type цілочисельний ідентифікатор типу фігури та градієнта
+     */
     public ShapeFactory(int shape_type) {
         switch(shape_type / 10) {
             case 1:
@@ -25,7 +30,7 @@ public class ShapeFactory {
             case 6:
             case 8:
             default:
-                throw new Error("type is nusupported");
+                throw new Error("type is unsupported");
             case 3:
                 this.shape = createStar(5, new Point(0, 0), (double)this.width / 2.0D, (double)this.width / 4.0D);
                 break;
@@ -53,7 +58,7 @@ public class ShapeFactory {
             case 5:
             case 6:
             default:
-                throw new Error("type is nusupported");
+                throw new Error("type is unsupported");
             case 3:
                 break;
             case 4:
@@ -68,6 +73,15 @@ public class ShapeFactory {
 
     }
 
+    /**
+     * Створює геометричну фігуру у вигляді зірки.
+     *
+     * @param arms кількість променів зірки
+     * @param center координати центру фігури
+     * @param rOuter зовнішній радіус
+     * @param rInner внутрішній радіус
+     * @return згенерована геометрична фігура (Shape)
+     */
     private static Shape createStar(int arms, Point center, double rOuter, double rInner) {
         double angle = 3.141592653589793D / (double)arms;
         GeneralPath path = new GeneralPath();

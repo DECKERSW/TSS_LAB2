@@ -1,4 +1,3 @@
-/* Decompiler 156ms, total 361ms, lines 69 */
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -17,6 +16,12 @@ public class TitlesPanel extends JPanel implements ActionListener {
     private int start_angle = 0;
     private int shape;
 
+    /**
+     * Конструктор панелі для анімації.
+     * Встановлює тип фігури та запускає таймер для оновлення кадрів.
+     *
+     * @param _shape ідентифікатор фігури, що буде малюватися
+     */
     public TitlesPanel(int _shape) {
         this.shape = _shape;
         this.animation = new Timer(50, this);
@@ -28,9 +33,14 @@ public class TitlesPanel extends JPanel implements ActionListener {
         if (this.is_done) {
             this.repaint();
         }
-
     }
 
+    /**
+     * Виконує безпосереднє відмальовування графіки на панелі.
+     * Застосовує трансформації, обертання та згладжування до фігур.
+     *
+     * @param g об'єкт графічного контексту для малювання
+     */
     private void doDrawing(Graphics g) {
         this.is_done = false;
         this.g2d = (Graphics2D)g;
