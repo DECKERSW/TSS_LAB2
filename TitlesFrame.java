@@ -13,8 +13,11 @@ public class TitlesFrame extends JFrame {
      */
     private void initUI() {
         this.setTitle("Кривые фигуры");
-        this.setDefaultCloseOperation(3);
-        this.add(new TitlesPanel(57));
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Виправлення "Магічного числа"
+
+        // РЕФАКТОРИНГ: Використання Enum замість Impostor Type (магічного числа 57)
+        this.add(new TitlesPanel(ShapeFactory.FigureShape.SQUARE, ShapeFactory.FigureStyle.GRADIENT));
+
         this.setSize(350, 350);
         this.setLocationRelativeTo((Component)null);
     }

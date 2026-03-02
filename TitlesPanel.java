@@ -14,16 +14,35 @@ public class TitlesPanel extends JPanel implements ActionListener {
     private Timer animation;
     private boolean is_done = true;
     private int start_angle = 0;
-    private int shape;
+
+    // Замість int зберігаємо фабрику (усунення Impostor Type)
+    private ShapeFactory shapeFactory;
 
     /**
+     * СТАРИЙ КОНСТРУКТОР: Збережено для зворотної сумісності.
      * Конструктор панелі для анімації.
      * Встановлює тип фігури та запускає таймер для оновлення кадрів.
      *
-     * @param _shape ідентифікатор фігури, що буде малюватися
+     * @param _shape ідентифікатор фігури (старий формат числа), що буде малюватися
      */
     public TitlesPanel(int _shape) {
-        this.shape = _shape;
+        this.shapeFactory = new ShapeFactory(_shape);
+        initTimer();
+    }
+
+    /**
+     * НОВИЙ КОНСТРУКТОР: Використовує строгу типізацію (Enum).
+     * Конструктор панелі для анімації, що використовує безпечні перерахування.
+     * * @param shape безпечний тип геометричної форми
+     * @param style безпечний тип стилю та заливки
+     */
+    public TitlesPanel(ShapeFactory.FigureShape shape, ShapeFactory.FigureStyle style) {
+        this.shapeFactory = new ShapeFactory(shape, style);
+        initTimer();
+    }
+
+    // Винесення ініціалізації таймера в окремий метод (усунення Run-On Initialization)
+    private void initTimer() {
         this.animation = new Timer(50, this);
         this.animation.setInitialDelay(50);
         this.animation.start();
@@ -49,26 +68,25 @@ public class TitlesPanel extends JPanel implements ActionListener {
         Insets insets = this.getInsets();
         int w = size.width - insets.left - insets.right;
         int h = size.height - insets.top - insets.bottom;
-        ShapeFactory shape = new ShapeFactory(this.shape);
-        this.g2d.setStroke(shape.stroke);
-        this.g2d.setPaint(shape.paint);
+
+        // Використовуємо вже проініціалізовані значення фабрики
+        this.g2d.setStroke(shapeFactory.stroke);
+        this.g2d.setPaint(shapeFactory.paint);
+
         double angle = (double)(this.start_angle++);
-        if (this.start_angle > 360) {
-            this.start_angle = 0;
-        }
+        if (this.start_angle > 360) this.start_angle = 0;
 
-        double dr = 90.0D / ((double)w / ((double)shape.width * 1.5D));
+        double dr = 90.0D / ((double)w / ((double)shapeFactory.width * 1.5D));
 
-        for(int j = shape.height; j < h; j = (int)((double)j + (double)shape.height * 1.5D)) {
-            for(int i = shape.width; i < w; i = (int)((double)i + (double)shape.width * 1.5D)) {
+        for(int j = shapeFactory.height; j < h; j = (int)((double)j + (double)shapeFactory.height * 1.5D)) {
+            for(int i = shapeFactory.width; i < w; i = (int)((double)i + (double)shapeFactory.width * 1.5D)) {
                 angle = angle > 360.0D ? 0.0D : angle + dr;
                 AffineTransform transform = new AffineTransform();
                 transform.translate((double)i, (double)j);
                 transform.rotate(Math.toRadians(angle));
-                this.g2d.draw(transform.createTransformedShape(shape.shape));
+                this.g2d.draw(transform.createTransformedShape(shapeFactory.shape));
             }
         }
-
         this.is_done = true;
     }
 
